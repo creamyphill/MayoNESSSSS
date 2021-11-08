@@ -1,0 +1,68 @@
+import discord
+from discord.utils import get
+from discord.ext import commands
+from Nessssssss import songAPI
+
+
+
+bot = commands.Bot(command_prefix = ">", help_command=None)
+mayoplay = songAPI()
+
+@bot.event
+async def on_ready():
+    print("I'm ready for command")
+
+@bot.command()
+async def help(ctx):
+    
+    emBed = discord.Embed(title = "How to use MayoNESSS Bot.", description = "This is every command you can use.", color = 0x03d7fc)
+    emBed.add_field(name = ">help" , value ="To see every command", inline = False)
+    emBed.add_field(name = ">play" , value ="Play music", inline = False)
+    emBed.add_field(name = ">pause" , value ="Pause music ", inline = False)
+    emBed.add_field(name = ">stop" , value ="Stop music", inline = False)
+    emBed.add_field(name = ">skip" , value = "Skip music" , inline= False)
+    await ctx.channel.send(embed = emBed)
+
+@bot.command()
+async def play(ctx, * ,search: str):
+   await mayoplay.play(ctx, search)
+
+@bot.command()
+async def stop(ctx):
+    await mayoplay.stop(ctx)
+
+@bot.command()
+async def pause(ctx):
+     await mayoplay.pause(ctx)
+
+@bot.command()
+async def resume(ctx):
+    await mayoplay.resume(ctx)
+
+@bot.command()
+async def queueList(ctx):
+    await mayoplay.queueList(ctx)
+
+@bot.command()
+async def skip(ctx):
+    await mayoplay.skip(ctx)
+
+@bot.command()
+async def leave(ctx):
+    await ctx.voice_client.disconnect()  
+
+    
+
+@bot.event
+async def on_message(message):
+    if message.content == (">Hi"):
+        await message.channel.send("Hi, How are you?")
+    if message.content == (">Fuck you"):
+        await message.channel.send("Watch your language!")
+    if message.content == ("555"):
+        await message.channel.send("lol")
+    await bot.process_commands(message)
+
+    
+    
+bot.run("ODg4MzM5NDI5MTk2OTcyMDYy.YURQkA.ZoACO7XGFLB79fBIPitAbaJyV1w")
