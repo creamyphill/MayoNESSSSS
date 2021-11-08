@@ -1,7 +1,7 @@
 import discord
 from discord.utils import get
 from discord.ext import commands
-from Nessssssss import songAPI
+from NESSSSS import songAPI
 
 
 
